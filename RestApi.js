@@ -15,6 +15,7 @@ module.exports = class RestApi {
       this.createPostRoute(table);
       this.createPutRoute(table);
       this.createDeleteRoute(table);
+      this.createGetAllBilForum(table);
     }
 
     this.addLoginRoutes();
@@ -149,6 +150,21 @@ module.exports = class RestApi {
       res.json({ loggedOut: true });
     });
 
+  }
+
+  //getting all bilforum posts from database
+   createGetAllBilForum(table) {
+    this.app.get(this.prefix + table, (req, res) => {
+      let statement = this.db.prepare(`
+      SELECT * FROM ${table}
+    `);
+      try {
+        res.json(statement.all());
+      }
+      catch (e) {
+        res.json({error: e + ''})
+      }
+    });
   }
 
 }
