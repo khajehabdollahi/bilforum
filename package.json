@@ -8,12 +8,14 @@
     "@testing-library/user-event": "^12.6.0",
     "better-express-store": "^1.0.4",
     "better-sqlite3": "^7.1.2",
+    "bootstrap": "^4.5.3",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "react": "^17.0.1",
     "react-amazing-proxy": "^1.0.63",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
+    "reactstrap": "^8.8.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
