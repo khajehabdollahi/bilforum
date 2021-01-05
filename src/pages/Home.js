@@ -5,17 +5,15 @@ import { Container, Row, Col, Card, CardTitle, CardText, CardBody } from 'reacts
 
 const Home = () => {
 
-  const { forums, getForumText } = useContext(ForumContext);
+  const { forums } = useContext(ForumContext);
 
   const forumList = () => {
     if (forums !== undefined) {
       return (
         forums.map((forum, index) => {
           return (
-            <Col
-              key={"res" + index + forum.id}
-              className="mt-2 mb-4 col" xs={12} md={6} lg={4}
-              style={{ cursor: "pointer" }}>
+            <Col key={"res" + index + forum.id}
+              className="mt-2 mb-4 col" xs={12} md={6} lg={4}>
               <Card outline color="light">
                 <CardBody>
                   <CardTitle className="text-muted">Title {forum.title} </CardTitle>
@@ -25,20 +23,14 @@ const Home = () => {
             </Col>
           )
         })
-    )
+      )
     }
   }
 
 
-  useEffect(() => {
-    getForumText()
-    console.log(forums);
-  }, [])
-
-
   return (
     <Container className="mb-3">
-      {forumList}
+      {forumList()}
     </Container>
   )
 

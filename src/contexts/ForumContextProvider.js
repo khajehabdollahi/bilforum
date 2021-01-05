@@ -12,9 +12,12 @@ export default function ForumContextProvider(props) {
     console.log(res);
   }
 
+  useEffect(() => {
+    getForumText()
+  }, [])
+
   const values = {
-    forums,
-    getForumText
+    forums
   }
 
   return (
