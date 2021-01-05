@@ -13,7 +13,7 @@ export default function ForumContextProvider(props) {
   }
 
   const getForumTextById = async (id) => {
-    let res = await fetch('/api/forums' + id)
+    let res = await fetch('/api/forums/' + id)
     res = await res.json()
     setForum(res)
   }

@@ -12,18 +12,20 @@ const Home = () => {
       return (
         forums.map((forum, index) => {
           return (
-            <>
+            <div key={"res" + index + forum.id}>
+            <Row>
              <Link to={`/${forum.id}`} onClick={() => getForumTextById(forum.id)}>
-                <Col key={"res" + index + forum.id} className="mt-2 mb-4 col" xs={12} md={6} lg={4}>             
-                <Card outline color="light">
-                  <CardBody>
-                    <CardTitle className="text-muted">Title {forum.title} </CardTitle>
-                    <CardText className="text-dark">Text {forum.text} </CardText>
-                  </CardBody>
-                </Card>
+                <Col  className="mt-1 col" >             
+                  <Card outline color="light">
+                    <CardBody>
+                      <CardTitle className="text-muted">Title {forum.title} </CardTitle>
+                    </CardBody>
+                  </Card>
                 </Col>
+               
               </Link>
-            </>
+            </Row>
+            </div>
           )
         })
       )
@@ -33,9 +35,9 @@ const Home = () => {
 
   return (
     <Container className="mb-3">
-      <Row>
+        <h1>Forums</h1>
         {forumList()}
-      </Row>
+
     </Container>
   )
 
