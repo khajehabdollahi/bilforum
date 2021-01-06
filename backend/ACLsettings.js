@@ -12,7 +12,7 @@ module.exports = {
   },
   users(user, method, req) {
     // Allow everyone to create a user if the userRole is basicUser
-    if (method === 'POST' && req.body.userRole === 'basicUser') { return true; }
+    if (method === 'POST') { return true; }
     // Allow admins to create a user with any role...
     if (method === 'POST' && user.userRole === 'admin') { return true;}
     // Allow all logged in users to a see a list of other users

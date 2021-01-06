@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
-  NavbarText
+  NavItem
 } from 'reactstrap';
 
 const TopNavbar = (props) => {
@@ -18,16 +17,18 @@ const TopNavbar = (props) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
+        <Link className="nav-brand" to="/"><h3>Bil Forum</h3></Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/about/">Components</NavLink>
+              <Link to="/signup">Sign up</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/signin">Sign in</Link>
             </NavItem>
             
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
         </Collapse>
       </Navbar>
     </div>
