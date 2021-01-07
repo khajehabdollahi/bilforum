@@ -1,11 +1,13 @@
 import './App.css';
 import TopNavbar from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import Register from './components/Register'
 import Login from './components/Login'
 import ForumContextProvider from './contexts/ForumContextProvider'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ForumDetails from './pages/ForumDetails'
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
             <Route exact path="/:id" component={ForumDetails} /> 
           </Switch>  
         </ForumContextProvider>
+        <Footer/>
         </Router>   
     </div>
   );
