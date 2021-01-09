@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const Register = (props) => {
   const [email, setEmail] = useState('')
@@ -26,26 +26,31 @@ const Register = (props) => {
 
 
   return (
-    <div className="d-flex justify-content-center mt-5 flex-direction-column">
-      <Form onSubmit={userRegister}>
-        <FormGroup>
-          <Label for="exampleEmail" className="mr-sm-2">Email</Label>
-          <Input  type="email"  name="email" id="email" placeholder="something@idk.cool"
-           value={email} onChange={e=>setEmail(e.target.value)} required />
-        </FormGroup>
-        <FormGroup>
-          <Label for="examplePassword" className="mr-sm-2">Password</Label>
-          <Input type="password" name="password" id="examplePassword" placeholder="don't tell!" value={password} 
-            onChange={e=>setPassword(e.target.value)} required/>
-        </FormGroup>
-        <FormGroup>
-          <Label for="exampleEmail" className="mr-sm-2">Role</Label>
-          <Input  type="email"  name="email" id="email" placeholder="admin"
-           value={userRole} onChange={e=>setUserRole(e.target.value)} required />
-        </FormGroup>
-        <Button>Submit</Button>
-      </Form>
-    </div>
+    <Container className="mt-5">
+      <Row>   
+        <Col lg="5" className="mx-auto">
+          <h4>Sign up</h4>
+          <Form onSubmit={userRegister}>
+            <FormGroup>
+              <Label for="exampleEmail" className="mr-sm-2">Email</Label>
+              <Input  type="email"  name="email" id="email" placeholder="something@idk.cool"
+              value={email} onChange={e=>setEmail(e.target.value)} required />
+            </FormGroup>
+            <FormGroup>
+              <Label for="examplePassword" className="mr-sm-2">Password</Label>
+              <Input type="password" name="password" id="examplePassword" placeholder="don't tell!" value={password} 
+                onChange={e=>setPassword(e.target.value)} required/>
+            </FormGroup>
+            <FormGroup>
+              <Label for="exampleEmail" className="mr-sm-2">Role</Label>
+              <Input  type="email"  name="email" id="email" placeholder="admin"
+              value={userRole} onChange={e=>setUserRole(e.target.value)} required />
+            </FormGroup>
+            <Button>Submit</Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

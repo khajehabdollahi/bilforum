@@ -1,37 +1,26 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem
-} from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
 
 const TopNavbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" light expand="md" className="px-5">
         <Link className="nav-brand" to="/"><h3>Bil Forum</h3></Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            <NavItem>
-              <Link to="/signup">Sign up</Link>
+            <NavItem className="mr-lg-3">
+              <Link to="/signup" >Sign up</Link>
             </NavItem>
             <NavItem>
-              <Link to="/signin">Sign in</Link>
-            </NavItem>
-            
+              <Link  to="/signin">Sign in</Link>
+            </NavItem>            
           </Nav>
         </Collapse>
       </Navbar>
-    </div>
   );
 }
 
