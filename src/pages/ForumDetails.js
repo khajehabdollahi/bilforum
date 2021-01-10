@@ -46,11 +46,11 @@ const ForumDetails = (props) => {
           <FormGroup>
             <Label for="exampleEmail">Title</Label>
               <Input type="text" name="text" id="exampleEmail" placeholder="Write title"
-                defaultValue={forum.title} onChange={e=>setEditTitle(e.target.value)}/>
+                defaultValue={forum.title} onChange={e=>setEditTitle(e.target.value)} required/>
           </FormGroup>
           <FormGroup>
             <Label for="exampleText">Text Area</Label>
-            <Input type="textarea" name="text" id="exampleText" defaultValue={forum.text}  onChange={e=>setEditText(e.target.value)}/>
+            <Input type="textarea" name="text" id="exampleText" defaultValue={forum.text}  onChange={e=>setEditText(e.target.value)} required/>
           </FormGroup>
           <Button className="btn-success">Submit</Button>
           </Form>
@@ -62,9 +62,9 @@ const ForumDetails = (props) => {
   const dispForumDetails = () => {
     return (
         <Col key={"key"+forum.id}>
-          <h1 className="text-secondary">Ttitle:<span className="text-info"> {forum.title} </span></h1>
+          <h4 className="text-secondary">Ttitle:<span className="text-info"> {forum.title} </span></h4>
         <p>{ forum.writer }</p>  
-        <p className="mt-3">{forum.text}</p>
+        <p className="mt-3" style={{fontSize: "18px"}}>{forum.text}</p>
         <div className="mt-5">
           <Button color="success" className="mr-2">Comment</Button>
           <Button color="primary" className="mr-2" onClick={toggle}>Edit</Button>

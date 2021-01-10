@@ -12,7 +12,7 @@ const Home = () => {
       return (
         forums.map((forum, index) => {
           return (
-            <Container className="bg-dark text-light">
+           
             <div key={"res" + index + forum.id}>
             <Row className="bg-warning text-danger">
              <Link to={`/${forum.id}`} onClick={() => getForumTextById(forum.id)}>
@@ -27,7 +27,7 @@ const Home = () => {
               </Link>
             </Row>
             </div>
-            </Container>
+          
           )
         })
       )

@@ -11,7 +11,10 @@ const TopNavbar = (props) => {
         <Link className="nav-brand" to="/"><h3>Bil Forum</h3></Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto" navbar>
+        <Nav className="ml-auto" navbar>
+            <NavItem className="mr-lg-3">
+              <Link to="/mypage" >My page</Link>
+            </NavItem>
             <NavItem className="mr-lg-3">
               <Link to="/signup" >Sign up</Link>
             </NavItem>
