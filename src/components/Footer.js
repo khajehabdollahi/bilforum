@@ -4,8 +4,8 @@ import { Container, Row, Col, Card, CardTitle, CardText, CardBody } from 'reacts
 
 export default function Footer() {
   return (
-    <Container className="footer fixed-bottom" fluid>
-      <Row className="bg-light">
+    <Container className="footer" fluid>
+      <Row className="bg-light mt-5">
         <Col lg="123" className="mx-auto py-5">
           <div style={{textAlign:"center"}}>
             <ul className="nav">
