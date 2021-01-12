@@ -19,7 +19,7 @@ export default function Footer() {
                 <a className="nav-link" href="https://www.youtube.com/c/SvenskaSwedish">Youtube</a>
               </li>
               <li className="nav-item">
-                  <a className="nav-link" href="#">Addrtess</a>
+                  <a className="nav-link" href="#">Address</a>
               </li>
             </ul>
           </div>

@@ -1,6 +1,7 @@
 import './App.css';
 import TopNavbar from './components/Navbar'
 import Footer from './components/Footer'
+import About from './components/About'
 import Home from './pages/Home'
 import MyPage from './pages/MyPage'
 import Register from './components/Register'
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/signup" component={Register} />
             <Route exact path="/signin" component={Login} />
             <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/about" component={About} />
             <Route exact path="/:id" component={ForumDetails} /> 
             </Switch>  
             </div>
