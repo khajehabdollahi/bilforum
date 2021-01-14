@@ -34,8 +34,9 @@ const MyPage = (props) => {
   const showForm = () => {
     return (
       <Row className="mt-5">
-        <Col>     
-        <Form onSubmit={submitForum}>
+        <Col lg="6" className="mx-auto">
+          <h4 className="text-center">Write a post</h4>
+        <Form onSubmit={submitForum} className="mt-4">
           <FormGroup>
             <Label for="exampleEmail">Title</Label>
               <Input type="text" name="text" id="exampleEmail" placeholder="Write title"

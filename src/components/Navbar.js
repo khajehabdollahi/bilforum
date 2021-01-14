@@ -7,8 +7,9 @@ const TopNavbar = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Container className="bg.danger">
-      <Navbar  color="light" light expand="md" className=" px-5">
+    <Container className="px-0 mx-0 bg-light" fluid>
+      <div className="px-lg-5 mx-0" >
+      <Navbar light expand="md" className=" px-5">
         <Link className="nav-brand" to="/"><h3>Bil Forum</h3></Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -27,7 +28,8 @@ const TopNavbar = (props) => {
             </NavItem>            
           </Nav>
         </Collapse>
-      </Navbar>
+        </Navbar>
+        </div>
       </Container>
   );
 }

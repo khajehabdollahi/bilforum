@@ -33,7 +33,8 @@ module.exports = class RestApi {
   createGetAllRoute(table) {
     this.app.get(this.prefix + table, (req, res) => {
       let statement = this.db.prepare(`
-      SELECT * FROM ${table}
+      SELECT * FROM forums, users
+      WHERE forums.authorId = users.id
     `);
       try {
         res.json(statement.all().map(x => ({ ...x, password: undefined })));

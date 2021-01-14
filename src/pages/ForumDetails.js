@@ -63,25 +63,23 @@ const ForumDetails = (props) => {
     return (
         <Col key={"key"+forum.id}>
           <h4 className="text-secondary">Ttitle:<span className="text-info"> {forum.title} </span></h4>
-        <p>{ forum.writer }</p>  
-        <p className="mt-3" style={{fontSize: "18px"}}>{forum.text}</p>
-        <div className="mt-5">
-          <Button color="success" className="mr-2">Comment</Button>
-          <Button color="primary" className="mr-2" onClick={toggle}>Edit</Button>
-          <Button color="danger" onClick={()=>deleteForum(forum.id)}>Delete</Button>
-        </div>
-        <Fade in={fadeIn} tag="h5" className="mt-3">
-            {showEditForm()}
-        </Fade>
-        
-     
+                <p> Hello{forum.name}</p>  
+          <p className="mt-3" style={{fontSize: "18px"}}>{forum.text}</p>
+          <div className="mt-5">
+            <Button color="success" className="mr-2">Comment</Button>
+            <Button color="primary" className="mr-2" onClick={toggle}>Edit</Button>
+            <Button color="danger" onClick={()=>deleteForum(forum.id)}>Delete</Button>
+          </div>
+          <Fade in={fadeIn} tag="h5" className="mt-3">
+              {showEditForm()}
+          </Fade>       
         </Col>
       )
   }        
       
   return (
     <Container>
-      <Row className="mt-5 thread-details">
+      <Row className="mt-5 mx-md-3 mx-lg-5 thread-details">
         {forum && dispForumDetails()}
       </Row>
     </Container>
