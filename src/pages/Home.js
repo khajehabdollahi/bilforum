@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <Container className="my-3 mx-5">
       <Row>
-        <Col className="my-3" lg="12" style={{marginLeft: "25px"}}>
+        <Col className="my-3 mx-4" lg="12">
             <h3>Forums</h3>
         </Col>
       </Row>

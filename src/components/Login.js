@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../contexts/UserContextProvider';
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const Login = (props) => {
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [userRole, setUserRole] = useState('')
@@ -22,6 +24,8 @@ const Login = (props) => {
       if (res == null) {
         setError("Fel email eller lösenord!");
       } else {
+        setUser(res)
+        localStorage.setItem('session', JSON.stringify(res));
         props.history.push('/')
       }
     } catch {

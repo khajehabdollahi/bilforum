@@ -63,7 +63,7 @@ const ForumDetails = (props) => {
     return (
         <Col key={"key"+forum.id}>
           <h4 className="text-secondary">Ttitle:<span className="text-info"> {forum.title} </span></h4>
-                <p> Hello{forum.name}</p>  
+                <p> Hello{forum.email}</p>  
           <p className="mt-3" style={{fontSize: "18px"}}>{forum.text}</p>
           <div className="mt-5">
             <Button color="success" className="mr-2">Comment</Button>

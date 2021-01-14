@@ -1,15 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ForumContext } from '../contexts/ForumContextProvider';
+import { UserContext } from '../contexts/UserContextProvider';
 import { Container, Row, Col, Button, Form, FormGroup, Input, Label, Fade } from 'reactstrap';
 
 const MyPage = (props) => {
 
-  const [fadeIn, setFadeIn] = useState(false);
-  const toggle = () => setFadeIn(!fadeIn);
-  const { forum } = useContext(ForumContext);
+  const { getForumText } = useContext(ForumContext);
+  const { user } = useContext(UserContext);
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
-
 
 
   const submitForum = (e) => {
@@ -20,9 +19,10 @@ const MyPage = (props) => {
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({title, text}) 
+      body: JSON.stringify({title, text, authorId:user.id}) 
     })
       .then(res => {
+        getForumText()
         if (res.ok) {
           setTitle('')
           setText('')

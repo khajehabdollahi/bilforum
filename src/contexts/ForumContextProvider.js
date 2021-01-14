@@ -23,6 +23,7 @@ export default function ForumContextProvider(props) {
   }, [])
 
   const values = {
+    getForumText,
     forums,
     forum,
     getForumTextById

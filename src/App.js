@@ -7,6 +7,7 @@ import MyPage from './pages/MyPage'
 import Register from './components/Register'
 import Login from './components/Login'
 import ForumContextProvider from './contexts/ForumContextProvider'
+import UserContextProvider from './contexts/UserContextProvider'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ForumDetails from './pages/ForumDetails'
 
@@ -17,6 +18,7 @@ function App() {
       <Router>   
       <TopNavbar />
         <ForumContextProvider> 
+          <UserContextProvider>
           <div className="content">
           <Switch>
             <Route exact path="/" component={Home} />
@@ -27,6 +29,7 @@ function App() {
             <Route exact path="/:id" component={ForumDetails} /> 
             </Switch>  
             </div>
+            </UserContextProvider>
         </ForumContextProvider>
         <Footer/>
         </Router>   

@@ -5,11 +5,12 @@ const Register = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [userRole, setUserRole] = useState('')
+  const [userName, setUserName] = useState('')
 
   const userRegister = async (e) => {
     e.preventDefault();
     
-    const credentials = {email, password, userRole }
+    const credentials = {email, password, userRole, name: userName }
   
     let res = await fetch("/api/users", {
       method: "POST",
@@ -42,8 +43,13 @@ const Register = (props) => {
                 onChange={e=>setPassword(e.target.value)} required/>
             </FormGroup>
             <FormGroup>
+              <Label for="exampleEmail" className="mr-sm-2">Name</Label>
+              <Input  type="text"  name="text" id="text" placeholder="Name"
+              value={userName} onChange={e=>setUserName(e.target.value)} required />
+            </FormGroup>
+            <FormGroup>
               <Label for="exampleEmail" className="mr-sm-2">Role</Label>
-              <Input  type="email"  name="email" id="email" placeholder="admin"
+              <Input  type="text"  name="text" id="text" placeholder="role"
               value={userRole} onChange={e=>setUserRole(e.target.value)} required />
             </FormGroup>
             <Button>Submit</Button>
