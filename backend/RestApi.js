@@ -11,10 +11,12 @@ module.exports = class RestApi {
     let tables = this.getAllTables();
     for (let table of tables) {
       this.createGetAllRoute(table);
-      this.createGetRoute(table);
       this.createPostRoute(table);
       this.createPutRoute(table);
       this.createDeleteRoute(table);
+      this.GetAllForums();
+      this.getOneThread(table);
+      this.getOneThreadComments(table);
     }
 
     this.addLoginRoutes();
@@ -33,8 +35,8 @@ module.exports = class RestApi {
   createGetAllRoute(table) {
     this.app.get(this.prefix + table, (req, res) => {
       let statement = this.db.prepare(`
-      SELECT * FROM forums, users
-      WHERE forums.authorId = users.id
+        SELECT * ${table}
+        WHERE ${table}.id = $id
     `);
       try {
         res.json(statement.all().map(x => ({ ...x, password: undefined })));
@@ -45,11 +47,50 @@ module.exports = class RestApi {
     });
   }
 
-  createGetRoute(table) {
+
+  GetAllForums() {
+    this.app.get('/api/forums', (req, res) => {
+      let statement = this.db.prepare(`
+        SELECT *
+        FROM forums f
+        LEFT JOIN users ON f.authorId = users.userID
+        LEFT JOIN comments ON f.commentId = comments.commentID
+    `);
+      try {
+        res.json(statement.all().map(x => ({ ...x, password: undefined })));
+      }
+      catch (e) {
+        res.json({error: e + ''})
+      }
+    });
+  }
+
+  getOneThread(table) {
     this.app.get(this.prefix + table + '/:id', (req, res) => {
       let statement = this.db.prepare(`
-      SELECT * FROM ${table}
-      WHERE id = $id
+      SELECT *
+      FROM forums f, comments c, users u
+      INNER JOIN users ON f.authorId = users.userID
+      WHERE f.id = $id
+    `);
+      let result;
+      try {
+        result = statement.get(req.params) || null;
+      }
+      catch (e) {
+        result = { error: e + '' };
+      }
+      if (result) { delete result.password; }
+      res.json(result);
+    })
+  }
+
+   getOneThreadComments(table) {
+    this.app.get(this.prefix + table + '/:id/comments', (req, res) => {
+      let statement = this.db.prepare(`
+      SELECT *
+      FROM comments c, users u
+      INNER JOIN users ON c.commentatorId = u.userID
     `);
       let result;
       try {
