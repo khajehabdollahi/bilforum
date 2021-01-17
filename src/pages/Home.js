@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
 
-  const { forums, getForumTextById } = useContext(ForumContext);
+  const { forums, getForumTextById, getForumComments } = useContext(ForumContext);
 
   const forumList = () => {
     if (forums !== undefined) {
@@ -13,7 +13,9 @@ const Home = () => {
         forums.map((forum, index) => {
           return (
             <div key={"res" + index + forum.id}>     
-                <Link to={`/${forum.id}`} onClick={() => getForumTextById(forum.id)}
+              <Link to={`/${forum.id}`} onClick={() => 
+                  getForumTextById(forum.id)
+              }
                   style={{textDecoration: "none"}}>
         
                   <div>

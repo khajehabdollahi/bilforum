@@ -90,7 +90,7 @@ module.exports = class RestApi {
       let statement = this.db.prepare(`
       SELECT *
       FROM comments c, users u
-      INNER JOIN users ON c.commentatorId = u.userID
+      WHERE c.commentID = $id AND c.commentatorId = u.userID
     `);
       let result;
       try {

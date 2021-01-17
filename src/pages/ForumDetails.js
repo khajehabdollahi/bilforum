@@ -5,7 +5,7 @@ import { Container, Row, Col, Button, Form, FormGroup, Input, Label, Fade } from
 const ForumDetails = (props) => {
   const [fadeIn, setFadeIn] = useState(false);
   const toggle = () => setFadeIn(!fadeIn);
-  const { forum } = useContext(ForumContext);
+  const { forum, comments } = useContext(ForumContext);
   const [editTitle, setEditTitle] = useState('')
   const [editText, setEditText] = useState('')
 
@@ -41,7 +41,7 @@ const ForumDetails = (props) => {
   const showEditForm = () => {
     return (
       <Row className="mt-5">
-        <Col>     
+        <Col lg="12">     
         <Form onSubmit={editForum}>
           <FormGroup>
             <Label for="exampleEmail">Title</Label>
@@ -61,9 +61,9 @@ const ForumDetails = (props) => {
 
   const dispForumDetails = () => {
     return (
-        <Col key={"key"+forum.id}>
+        <Col lg="12" key={"key"+forum.id}>
           <h4 className="text-secondary">Ttitle:<span className="text-info"> {forum.title} </span></h4>
-                <p> Hello{forum.email}</p>  
+                <p>Author: {forum.name}</p>  
           <p className="mt-3" style={{fontSize: "18px"}}>{forum.text}</p>
           <div className="mt-5">
             <Button color="success" className="mr-2">Comment</Button>
@@ -71,16 +71,30 @@ const ForumDetails = (props) => {
             <Button color="danger" onClick={()=>deleteForum(forum.id)}>Delete</Button>
           </div>
           <Fade in={fadeIn} tag="h5" className="mt-3">
-              {showEditForm()}
+              {fadeIn&&showEditForm()}
           </Fade>       
         </Col>
       )
-  }        
+  } 
+  
+   const dispComments = () => {
+    return (
+        <Col lg="12"  key={"key"+comments.commentID} className="mt-3">
+          <span>Commentator: <h4 className="text-info">{comments.name}</h4></span>  
+          <p className="mt-3 text-dark" style={{fontSize: "18px"}}>{comments.commentText}</p>      
+        </Col>
+      )
+  }   
       
   return (
     <Container>
-      <Row className="mt-5 mx-md-3 mx-lg-5 thread-details">
+      <Row className="mt-5">
         {forum && dispForumDetails()}
+      </Row>
+      <Row className="mt-3">
+        <h5 className="ml-3">Comments</h5>
+        <hr/>
+        {comments && dispComments()}
       </Row>
     </Container>
   )
