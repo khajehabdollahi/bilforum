@@ -10,6 +10,7 @@ import ForumContextProvider from './contexts/ForumContextProvider'
 import UserContextProvider from './contexts/UserContextProvider'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ForumDetails from './pages/ForumDetails'
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 function App() {
@@ -20,13 +21,14 @@ function App() {
         <ForumContextProvider> 
           <UserContextProvider>
           <div className="content">
-          <Switch>
+            <Switch>
+            <ProtectedRoute exact path='/mypage' component={MyPage} />  
             <Route exact path="/" component={Home} />
             <Route exact path="/signup" component={Register} />
             <Route exact path="/signin" component={Login} />
             <Route exact path="/mypage" component={MyPage} />
             <Route exact path="/about" component={About} />
-            <Route exact path="/:id" component={ForumDetails} /> 
+            <Route exact path="/:id" component={ForumDetails} />   
             </Switch>  
             </div>
             </UserContextProvider>
