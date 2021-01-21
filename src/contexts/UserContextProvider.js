@@ -1,17 +1,15 @@
 import React, { createContext, useState, useEffect } from 'react'
-
 export const UserContext = createContext()
 
-export default function ForumContextProvider(props) {
-  const [user, setUser] = useState()
-
+const UserContextProvider = (props) => {
+  const [user, setUser] = useState(null)
+ 
   useEffect(()=>{
-    const session = JSON.parse(localStorage.getItem('session'))
-    if (session) {
-      setUser(session)
+    const token = JSON.parse(localStorage.getItem('token'))
+    if (token) {
+      setUser(token)
     }
   },[])
-
 
   const values = {
     user,
@@ -24,3 +22,5 @@ export default function ForumContextProvider(props) {
     </UserContext.Provider>
   )
 }
+
+export default UserContextProvider

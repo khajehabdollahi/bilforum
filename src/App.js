@@ -16,10 +16,10 @@ import ProtectedRoute from './components/ProtectedRoute'
 function App() {
   return (
     <div className="App">
-      <Router>   
-      <TopNavbar />
+      <Router>  
         <ForumContextProvider> 
           <UserContextProvider>
+          <TopNavbar />
           <div className="content">
             <Switch>
             <ProtectedRoute exact path='/mypage' component={MyPage} />  

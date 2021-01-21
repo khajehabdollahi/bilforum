@@ -26,7 +26,7 @@ const Login = (props) => {
       } else {
         setUser(res)
         localStorage.setItem('session', JSON.stringify(res));
-        props.history.push('/')
+        props.history.push('/mypage')
       }
     } catch {
       console.log("Error!");

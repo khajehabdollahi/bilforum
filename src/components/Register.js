@@ -19,7 +19,7 @@ const Register = (props) => {
     });
     try {
       res = await res.json()
-      props.history.push('/')
+      props.history.push('/signin')
     } catch {
       console.log("Error!");
     }
