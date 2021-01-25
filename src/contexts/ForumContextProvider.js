@@ -3,22 +3,22 @@ import React, { createContext, useState, useEffect } from 'react'
 export const ForumContext = createContext()
 
 export default function ForumContextProvider(props) {
-  const [forums, setForums] = useState()
-  const [forum, setForum] = useState()
+  const [threads, setThreads] = useState()
+  const [thread, setThread] = useState()
   const [comments, setComments] = useState()
 
   const getForumText = async () => {
-    let res = await fetch('/api/forums')
+    let res = await fetch('/api/threads')
     res = await res.json()
-    setForums(res)
+    setThreads(res)
   }
 
   const getForumTextById = async (id) => {
-    let res1 = await fetch('/api/forums/' + id)
-    let res2 = await fetch('/api/forums/' + id + '/comments')
+    let res1 = await fetch('/api/threads/' + id)
+    let res2 = await fetch('/api/threads/' + id + '/comments')
     res1 = await res1.json()
     res2 = await res2.json()
-    setForum(res1)
+    setThread(res1)
     setComments(res2)
     console.log(comments);
   }
@@ -36,8 +36,8 @@ export default function ForumContextProvider(props) {
 
   const values = {
     getForumText,
-    forums,
-    forum,
+    threads,
+    thread,
     getForumTextById,
     comments
   }

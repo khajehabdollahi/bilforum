@@ -10,6 +10,9 @@ module.exports = {
     // Let everyone trash the product table
     return true;
   },
+  threads() { 
+    return true;
+  },
   users(user, method, req) {
     // Allow everyone to create a user if the userRole is basicUser
     if (method === 'POST') { return true; }

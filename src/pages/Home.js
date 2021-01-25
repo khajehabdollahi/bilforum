@@ -1,26 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { ForumContext } from '../contexts/ForumContextProvider';
-import { Container, Row, Col, Card, CardTitle, CardText, CardBody } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
 
-  const { forums, getForumTextById, getForumComments } = useContext(ForumContext);
+  const { threads, getForumTextById } = useContext(ForumContext);
 
-  const forumList = () => {
-    if (forums !== undefined) {
+  const threadsList = () => {
+    if (threads !== undefined) {
       return (
-        forums.map((forum, index) => {
+        threads.map((thread, index) => {
           return (
-            <div key={"res" + index + forum.id}>     
-              <Link to={`/${forum.id}`} onClick={() => 
-                  getForumTextById(forum.id)
+            <div key={"res" + index + thread.theadID}>     
+              <Link to={`/${thread.topic}`} onClick={() => 
+                  getForumTextById(thread.threadID)
               }
                   style={{textDecoration: "none"}}>
         
                   <div>
-                      <h4 className="text-muted">Title: {forum.title} </h4>
-                      <p>Writer : { forum.name }</p>
+                      <h4 className="text-muted">{thread.topic} </h4>
+                      <p>Skribent : { thread.name }</p>
                   </div>
       
               </Link>
@@ -33,15 +33,18 @@ const Home = () => {
 
 
   return (
-    <Container className="my-3 mx-5">
-      <Row>
+    <Container>
+      <Row className="my-3 mx-5">
         <Col className="my-3 mx-4" lg="12">
-            <h3>Forums</h3>
+          <h3 className="text-secondary text-center">Välkommen till min</h3>
+          <h1 className="text-info text-center">FORUM</h1>
         </Col>
+     
       </Row>
+         <hr/>
       <Row>
-        <Col className="mt-1" lg="12" style={{marginLeft: "25px"}}>      
-          {forumList()}
+        <Col className="mt-1 px-0" lg="12" style={{marginLeft: "25px"}}>      
+          {threadsList()}
         </Col>
       </Row>
     </Container>

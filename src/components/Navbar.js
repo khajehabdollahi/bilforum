@@ -17,8 +17,8 @@ const TopNavbar = (props) => {
 
   return (
     <Container className="px-0 mx-0 bg-light" fluid>
-      <div className="px-lg-5 mx-0" >
-      <Navbar light expand="md" className=" px-5">
+      <Container className="mx-auto px-2" >
+      <Navbar light expand="md" className=" px-3">
         <Link className="nav-brand" to="/"><h3>Bil Forum</h3></Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -48,7 +48,7 @@ const TopNavbar = (props) => {
           </Nav>
         </Collapse>
         </Navbar>
-        </div>
+        </Container>
       </Container>
   );
 }

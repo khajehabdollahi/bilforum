@@ -10,15 +10,15 @@ module.exports = class RestApi {
     this.prefix = urlPrefix;
     let tables = this.getAllTables();
     for (let table of tables) {
-      this.createGetAllRoute(table);
+      this.getAllUsers(table);
       this.createPostRoute(table);
       this.createPutRoute(table);
       this.createDeleteRoute(table);
-      this.GetAllForums();
-      this.getOneThread(table);
       this.getOneThreadComments(table);
     }
 
+    this.getAllThreads();
+    this.getOneThread();
     this.addLoginRoutes();
   }
 
@@ -32,14 +32,13 @@ module.exports = class RestApi {
       .map(x => x.name);
   }
 
-  createGetAllRoute(table) {
-    this.app.get(this.prefix + table, (req, res) => {
+  getAllThreads() {
+    this.app.get('/api/threads', (req, res) => {
       let statement = this.db.prepare(`
-        SELECT * ${table}
-        WHERE ${table}.id = $id
-    `);
+        SELECT * FROM threads t
+        JOIN users ON t.writer = users.userID`);
       try {
-        res.json(statement.all().map(x => ({ ...x, password: undefined })));
+        res.json(statement.all());
       }
       catch (e) {
         res.json({error: e + ''})
@@ -47,35 +46,16 @@ module.exports = class RestApi {
     });
   }
 
-
-  GetAllForums() {
-    this.app.get('/api/forums', (req, res) => {
+  getOneThread() {
+    this.app.get('/api/threads/:id', (req, res) => {
       let statement = this.db.prepare(`
         SELECT *
-        FROM forums f
-        LEFT JOIN users ON f.authorId = users.userID
-        LEFT JOIN comments ON f.commentId = comments.commentID
-    `);
-      try {
-        res.json(statement.all().map(x => ({ ...x, password: undefined })));
-      }
-      catch (e) {
-        res.json({error: e + ''})
-      }
-    });
-  }
-
-  getOneThread(table) {
-    this.app.get(this.prefix + table + '/:id', (req, res) => {
-      let statement = this.db.prepare(`
-      SELECT *
-      FROM forums f, comments c, users u
-      INNER JOIN users ON f.authorId = users.userID
-      WHERE f.id = $id
-    `);
+        FROM threads t
+        JOIN users ON t.writer = users.userID
+        WHERE threadID = ?`).get(req.params.id);
       let result;
       try {
-        result = statement.get(req.params) || null;
+        result = statement || null;
       }
       catch (e) {
         result = { error: e + '' };
@@ -85,8 +65,8 @@ module.exports = class RestApi {
     })
   }
 
-   getOneThreadComments(table) {
-    this.app.get(this.prefix + table + '/:id/comments', (req, res) => {
+   getOneThreadComments() {
+    this.app.get('/api/threads/:id/comments', (req, res) => {
       let statement = this.db.prepare(`
       SELECT *
       FROM comments c, users u
@@ -103,6 +83,24 @@ module.exports = class RestApi {
       res.json(result);
     })
   }
+
+
+  
+  getAllUsers() {
+    this.app.get('/api/users', (req, res) => {
+      let statement = this.db.prepare(`
+        SELECT * users
+        WHERE users.userID = $id
+    `);
+      try {
+        res.json(statement.all().map(x => ({ ...x, password: undefined })));
+      }
+      catch (e) {
+        res.json({error: e + ''})
+      }
+    });
+  }
+
 
   createPostRoute(table) {
     this.app.post(this.prefix + table, (req, res) => {
