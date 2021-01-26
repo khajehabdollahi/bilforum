@@ -20,15 +20,7 @@ export default function ForumContextProvider(props) {
     res2 = await res2.json()
     setThread(res1)
     setComments(res2)
-    console.log(comments);
   }
-
-  // const getForumComments = async (id) => {
-  //   let res = await fetch('/api/forums/' + id + '/comments')
-  //   res = await res.json()
-  //   setComments(res)
-  //   console.log(comments);
-  // }
 
   useEffect(() => {
     getForumText()

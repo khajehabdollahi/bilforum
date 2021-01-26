@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ForumContext } from '../contexts/ForumContextProvider';
 import { UserContext } from '../contexts/UserContextProvider';
-import { Container, Row, Col, Button, Form, FormGroup, Input, Label, Fade } from 'reactstrap';
+import { Container, Row, Col, Button, Form, FormGroup, Input, Label } from 'reactstrap';
 
 const MyPage = (props) => {
 

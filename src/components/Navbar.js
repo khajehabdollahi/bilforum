@@ -24,24 +24,24 @@ const TopNavbar = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem className="mr-lg-3">
-              <Link to="/about" >About us</Link>
+              <Link to="/about" >Om oss</Link>
             </NavItem>         
             {!user?(
             <>
             <NavItem className="mr-lg-3">
-              <Link to="/signup" >Sign up</Link>
+              <Link to="/signup" >Bli medlem</Link>
             </NavItem>
             <NavItem>
-              <Link  to="/signin">Sign in</Link>
+              <Link  to="/signin">Logga in</Link>
             </NavItem> 
             </>
             ):(
             <>
             <NavItem className="mr-lg-3">
-              <Link to="/mypage" >My page</Link>
+              <Link to="/mypage" >Mina sidor</Link>
             </NavItem>
             <NavItem>
-              <Link onClick={logoutUser} to="/"> Sign out</Link>
+              <Link onClick={logoutUser} to="/">Logga ut</Link>
             </NavItem>
             </>
             )}

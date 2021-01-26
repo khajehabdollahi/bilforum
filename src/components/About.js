@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, Card, CardTitle, CardText, CardBody } from 'reactstrap';
+import { Container } from 'reactstrap';
 
 
 export default function About() {
