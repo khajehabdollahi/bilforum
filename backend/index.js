@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const session = require('express-session');
 const store = require('better-express-store');
 
@@ -41,5 +42,12 @@ app.use(ACL(ACLsettings));
 // Create the REST api
 new RestApi(app);
 
+app.use(express.static(path.join(__dirname, 'hassan-forum')));
+app.get('/', (req, res)=>{
+ res.sendFile(path.join(__dirname, 'hassan-forum', 'index.html'));
+});
+
+// app.use(express.static('hassan-forum'));
+
 // Start the web server
-app.listen(5000, () => { console.log('Listening on port 5000') });
+app.listen(6000, () => { console.log('Listening on port 6000') });
