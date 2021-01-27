@@ -13,13 +13,17 @@ const MyPage = (props) => {
 
   const submitForum = (e) => {
     e.preventDefault();
-    
-    fetch('/api/forums', {
+    let data = {
+      topic: title,
+      text,
+      writer: user.userID
+    }
+    fetch('/api/threads', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({title, text, authorId:user.id}) 
+      body: JSON.stringify(data) 
     })
       .then(res => {
         getForumText()
@@ -35,18 +39,19 @@ const MyPage = (props) => {
     return (
       <Row className="mt-5">
         <Col lg="6" className="mx-auto">
-          <h4 className="text-center">Write a post</h4>
+          <h3>{ user.name.toUpperCase() }</h3>
+          <h4 className="text-center">Skriv en post</h4>
         <Form onSubmit={submitForum} className="mt-4">
           <FormGroup>
-            <Label for="exampleEmail">Title</Label>
-              <Input type="text" name="text" id="exampleEmail" placeholder="Write title"
+            <Label for="exampleEmail">Ämne</Label>
+              <Input type="text" name="text" id="exampleEmail" placeholder="Skriv ämne"
                 value={title} onChange={e=>setTitle(e.target.value)} required/>
           </FormGroup>
           <FormGroup>
             <Label for="exampleText">Text Area</Label>
             <Input type="textarea" name="text" id="exampleText" value={text}  onChange={e=>setText(e.target.value)} required/>
           </FormGroup>
-          <Button className="btn-success">Submit</Button>
+          <Button className="btn-success">Skicka</Button>
           </Form>
         </Col>
       </Row>

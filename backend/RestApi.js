@@ -66,11 +66,13 @@ module.exports = class RestApi {
   }
 
   createOneThread() {
-     this.app.post('/api/threads', (req, res) => {
+    this.app.post('/api/threads', (req, res) => {
       let b = req.body;
       let statement = this.db.prepare(`
       INSERT INTO threads (${Object.keys(b)})
-      VALUES (${Object.keys(b).map(x => '$' + x)})
+      VALUES (${Object.keys(b).map(x => '$' + x)},
+      (SELECT userID FROM users WHERE userID = b.userID), 
+      commentID: b.commentID)
     `);
       try {
         res.json(statement.run(b));
@@ -81,26 +83,7 @@ module.exports = class RestApi {
     });
   }
 
-  
-  editOneThread() {
-    this.app.put('/api/threads/:id', (req, res) => {
-      let b = req.body;
-      b.id = req.params.id;
-      let statement = this.db.prepare(`
-      UPDATE threads 
-      SET ${Object.keys(b).map(x => x + ' = $' + x)}
-      WHERE threads.threadID = ?
-    `).get(b.id);
-      try {
-        res.json(statement.run(b));
-      }
-      catch (e) {
-        res.json({error: e + ''})
-      }
-    });
-  }
-
-   getOneThreadComments() {
+  getOneThreadComments() {
     this.app.get('/api/threads/:id/comments', (req, res) => {
       let statement = this.db.prepare(`
       SELECT *
@@ -119,6 +102,8 @@ module.exports = class RestApi {
     })
   }
 
+
+  
   getAllUsers() {
     this.app.get('/api/users', (req, res) => {
       let statement = this.db.prepare(`

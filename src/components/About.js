@@ -1,12 +1,15 @@
 import React from 'react'
-import { Container } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 
 export default function About() {
   return (
-    <Container className="bg.primary" >
-      <h1>Here you can discuss abou cars</h1>
-      <a href="Home" class="btn btn-primary">Back to home</a>
+    <Container>
+      <Row>
+        <Col>
+          <h1 className="text-center mt-5">OM OSS</h1>
+        </Col>
+      </Row>
     </Container>
   )
 }
