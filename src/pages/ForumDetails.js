@@ -5,7 +5,7 @@ import { Container, Row, Col, Button, Form, FormGroup, Input, Label, Fade } from
 const ForumDetails = (props) => {
   const [fadeIn, setFadeIn] = useState(false);
   const toggle = () => setFadeIn(!fadeIn);
-  const { thread, comments } = useContext(ForumContext);
+  const { thread, comments, appendThreads, getForumText } = useContext(ForumContext);
   const [editTitle, setEditTitle] = useState('')
   const [editText, setEditText] = useState('')
 
@@ -15,6 +15,7 @@ const ForumDetails = (props) => {
       method: 'DELETE',
     })
       .then(res => {
+        getForumText();
       props.history.push('/')
     })
   }
@@ -27,7 +28,7 @@ const ForumDetails = (props) => {
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({title:editTitle, text:editText}) 
+      body: JSON.stringify({topic:editTitle, text:editText, writer: thread.name}) 
     })
       .then(res => {
         if (res.ok) {
@@ -68,7 +69,7 @@ const ForumDetails = (props) => {
           <div className="mt-5">
             <Button color="success" className="mr-2">Comment</Button>
             <Button color="primary" className="mr-2" onClick={toggle}>Edit</Button>
-            <Button color="danger" onClick={()=>deleteForum(thread.id)}>Delete</Button>
+            <Button color="danger" onClick={()=>deleteForum(thread.threadID)}>Delete</Button>
           </div>
           <Fade in={fadeIn} tag="h5" className="mt-3">
               {fadeIn&&showEditForm()}

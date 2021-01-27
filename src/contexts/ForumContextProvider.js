@@ -23,12 +23,9 @@ export default function ForumContextProvider(props) {
     console.log(comments);
   }
 
-  // const getForumComments = async (id) => {
-  //   let res = await fetch('/api/forums/' + id + '/comments')
-  //   res = await res.json()
-  //   setComments(res)
-  //   console.log(comments);
-  // }
+  const appendThreads = (newthread) => {
+    setThreads([...threads, newthread])
+  }
 
   useEffect(() => {
     getForumText()
@@ -39,7 +36,8 @@ export default function ForumContextProvider(props) {
     threads,
     thread,
     getForumTextById,
-    comments
+    comments,
+    appendThreads
   }
 
   return (

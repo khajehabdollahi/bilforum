@@ -13,12 +13,14 @@ module.exports = class RestApi {
       this.getAllUsers(table);
       this.createPostRoute(table);
       this.createPutRoute(table);
-      this.createDeleteRoute(table);
+      // this.createDeleteRoute(table);
       this.getOneThreadComments(table);
     }
 
     this.getAllThreads();
     this.getOneThread();
+    this.createOneThread();
+    this.deleteOneThread();
     this.addLoginRoutes();
   }
 
@@ -76,6 +78,20 @@ module.exports = class RestApi {
     `);
       try {
         res.json(statement.run(b));
+      }
+      catch (e) {
+        res.json({error: e + ''})
+      }
+    });
+  }
+
+  deleteOneThread(){
+    this.app.delete('/api/threads/:id', (req, res) => {
+      let statement = this.db.prepare(`
+        DELETE FROM threads
+        WHERE threadID = ${req.params.id}`);
+      try {
+          res.json(statement.run(req.params));
       }
       catch (e) {
         res.json({error: e + ''})
