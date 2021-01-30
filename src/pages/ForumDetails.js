@@ -9,7 +9,6 @@ const ForumDetails = (props) => {
   const [editTitle, setEditTitle] = useState('')
   const [editText, setEditText] = useState('')
 
-
   const deleteForum = (id) => {
     fetch('/api/threads/' + id, {
       method: 'DELETE',
@@ -22,16 +21,16 @@ const ForumDetails = (props) => {
 
   const editForum = (e) => {
     e.preventDefault();
-    
     fetch('/api/threads/' + thread.threadID, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({topic:editTitle, text:editText, writer: thread.name}) 
+      body: JSON.stringify({topic:editTitle, text:editText}) 
     })
       .then(res => {
         if (res.ok) {
+          getForumText()
           setEditTitle('')
           setEditText('')
           props.history.push('/')

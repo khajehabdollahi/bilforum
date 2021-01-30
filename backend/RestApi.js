@@ -12,7 +12,7 @@ module.exports = class RestApi {
     for (let table of tables) {
       this.getAllUsers(table);
       this.createPostRoute(table);
-      this.createPutRoute(table);
+      // this.createPutRoute(table);
       // this.createDeleteRoute(table);
       this.getOneThreadComments(table);
     }
@@ -20,6 +20,7 @@ module.exports = class RestApi {
     this.getAllThreads();
     this.getOneThread();
     this.createOneThread();
+    this.updateThread();
     this.deleteOneThread();
     this.addLoginRoutes();
   }
@@ -75,6 +76,23 @@ module.exports = class RestApi {
       VALUES (${Object.keys(b).map(x => '$' + x)},
       (SELECT userID FROM users WHERE userID = b.userID), 
       commentID: b.commentID)
+    `);
+      try {
+        res.json(statement.run(b));
+      }
+      catch (e) {
+        res.json({error: e + ''})
+      }
+    });
+  }
+
+  updateThread() {
+    this.app.put('/api/threads/:id', (req, res) => {
+      let b = req.body;
+      let statement = this.db.prepare(`
+      UPDATE threads 
+      SET ${Object.keys(b).map(x => x + ' = $' + x)}
+      WHERE threadID = ${req.params.id}
     `);
       try {
         res.json(statement.run(b));
@@ -155,26 +173,26 @@ module.exports = class RestApi {
     });
   }
 
-  createPutRoute(table) {
-    this.app.put(this.prefix + table + '/:id', (req, res) => {
-      let b = req.body;
-      if (b.password) {
-        b.password = Encrypt.multiEncrypt(b.password);
-      }
-      b.id = req.params.id;
-      let statement = this.db.prepare(`
-      UPDATE ${table} 
-      SET ${Object.keys(b).map(x => x + ' = $' + x)}
-      WHERE id = $id
-    `);
-      try {
-        res.json(statement.run(b));
-      }
-      catch (e) {
-        res.json({error: e + ''})
-      }
-    });
-  }
+  // createPutRoute(table) {
+  //   this.app.put(this.prefix + table + '/:id', (req, res) => {
+  //     let b = req.body;
+  //     if (b.password) {
+  //       b.password = Encrypt.multiEncrypt(b.password);
+  //     }
+  //     b.id = req.params.id;
+  //     let statement = this.db.prepare(`
+  //     UPDATE ${table} 
+  //     SET ${Object.keys(b).map(x => x + ' = $' + x)}
+  //     WHERE id = $id
+  //   `);
+  //     try {
+  //       res.json(statement.run(b));
+  //     }
+  //     catch (e) {
+  //       res.json({error: e + ''})
+  //     }
+  //   });
+  // }
 
   createDeleteRoute(table) {
     this.app.delete(this.prefix + table + '/:id', (req, res) => {
