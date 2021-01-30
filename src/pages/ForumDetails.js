@@ -1,11 +1,13 @@
 import React, {useContext, useState} from 'react'
 import { ForumContext } from '../contexts/ForumContextProvider';
+import { UserContext } from '../contexts/UserContextProvider';
 import { Container, Row, Col, Button, Form, FormGroup, Input, Label, Fade } from 'reactstrap';
 
 const ForumDetails = (props) => {
   const [fadeIn, setFadeIn] = useState(false);
   const toggle = () => setFadeIn(!fadeIn);
-  const { thread, comments, appendThreads, getForumText } = useContext(ForumContext);
+  const { thread, comments, getForumText } = useContext(ForumContext);
+   const { user } = useContext(UserContext);
   const [editTitle, setEditTitle] = useState('')
   const [editText, setEditText] = useState('')
 
@@ -65,14 +67,28 @@ const ForumDetails = (props) => {
           <h4 className="text-secondary">Ämne:<span className="text-info"> {thread.topic} </span></h4>
                 <p>Skribent: {thread.name}</p>  
           <p className="mt-3" style={{fontSize: "18px"}}>{thread.text}</p>
-          <div className="mt-5">
-            <Button color="success" className="mr-2">Comment</Button>
-            <Button color="primary" className="mr-2" onClick={toggle}>Edit</Button>
-            <Button color="danger" onClick={()=>deleteForum(thread.threadID)}>Delete</Button>
-          </div>
-          <Fade in={fadeIn} tag="h5" className="mt-3">
-              {fadeIn&&showEditForm()}
-          </Fade>       
+        <div className="mt-5">
+          {(() => {
+            if (user!==null) {
+              return (
+                  <Button color="success" className="mr-2">Comment</Button>    
+              )
+            }
+          })()}
+          {(() => {      
+            if (user !==null && (user.userID === thread.writer || user.userRole === 'admin' || user.userRole === 'moderator')) {
+              return (
+                <>
+                  <Button color="primary" className="mr-2" onClick={toggle}>Edit</Button>
+                  <Button color="danger" onClick={() => deleteForum(thread.threadID)}>Delete</Button>
+                </>
+              )
+            } 
+          })()}      
+        </div>
+        <Fade in={fadeIn} tag="h5" className="mt-3">
+            {fadeIn&&showEditForm()}
+        </Fade>       
         </Col>
       )
   } 
