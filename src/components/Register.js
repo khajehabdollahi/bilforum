@@ -49,8 +49,16 @@ const Register = (props) => {
             </FormGroup>
             <FormGroup>
               <Label for="exampleEmail" className="mr-sm-2">Role</Label>
-              <Input  type="text"  name="text" id="text" placeholder="role"
-              value={userRole} onChange={e=>setUserRole(e.target.value)} required />
+              {/* <Input  type="text"  name="text" id="text" placeholder="role"
+                value={userRole} onChange={e => setUserRole(e.target.value)} required /> */}
+              
+                <Input type="select" name="select" id="exampleSelect" required
+                        onChange={e => setUserRole(e.target.value)}>
+                    <option value =''>Select Role</option>
+                    <option value ='admin'>Admin</option>
+                    <option value ='moderator'>Moderator</option>
+                    <option value ='basicUser'>Basic User</option>
+                </Input>
             </FormGroup>
             <Button>Submit</Button>
           </Form>

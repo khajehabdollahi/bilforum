@@ -43,9 +43,13 @@ const Home = () => {
       </Row>
          <hr/>
       <Row>
-        <Col className="mt-1 px-0" lg="12" style={{marginLeft: "25px"}}>      
+  
+        <Col className="mt-1 px-0" lg="4">      
           {threadsList()}
+          </Col>
+        <Col className="home-bg mx-0 my-0" lg="8">
         </Col>
+
       </Row>
     </Container>
   )

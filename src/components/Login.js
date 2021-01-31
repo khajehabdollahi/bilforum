@@ -50,11 +50,11 @@ const Login = (props) => {
             <Input type="password" name="password" id="examplePassword" placeholder="don't tell!" value={password} 
               onChange={e=>setPassword(e.target.value)} required/>
           </FormGroup>
-          <FormGroup>
+          {/* <FormGroup>
             <Label for="exampleEmail" className="mr-sm-2">Role</Label>
             <Input  type="text"  name="email" id="email" placeholder="admin"
             value={userRole} onChange={e=>setUserRole(e.target.value)} required />
-          </FormGroup>
+          </FormGroup> */}
           <Button>Submit</Button>
           <p>{ error }</p>
           </Form>
